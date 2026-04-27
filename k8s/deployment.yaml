@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculadora
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: calculadora
+  template:
+    metadata:
+      labels:
+        app: calculadora
+    spec:
+      containers:
+        - name: calculadora
+          image: liliaph7/calculadora:latest
+          ports:
+            - containerPort: 3000
