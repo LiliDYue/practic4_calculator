@@ -18,10 +18,13 @@ jobs:
       - name: Setup kubeconfig
         run: |
           echo "${{ secrets.KUBECONFIG_B64 }}" | base64 -d > kubeconfig
-          echo "KUBECONFIG=$PWD/kubeconfig" >> $
-          
+          echo "KUBECONFIG=$PWD/kubeconfig" >> $GITHUB_ENV
+
+      - name: Debug kubeconfig (MUY IMPORTANTE)
+        run: cat kubeconfig
+
       - name: Test connection
         run: kubectl get nodes
 
-      - name: Deploy to Kubernetes
+      - name: Deploy
         run: kubectl apply -f k8s/
